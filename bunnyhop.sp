@@ -66,10 +66,10 @@ public Action CMD_Bunnyhop(int client, int args)
 		{
 			char ClientName[256] = {  };
 			GetClientName(client, ClientName, sizeof(ClientName));
-			ReplyToCommand(client, "[SM] toggled autobunnyhop on: %s", ClientName);
+			ReplyToCommand(client, "[SM] Set Autobunnyhop to '%s' on player '%s'", (State ? "ON" : "OFF"), ClientName);
 		}
 		
-		PrintToChat(ClientID, "[SM] toggled autobunnyhop on you");
+		PrintToChat(ClientID, "[SM] Autobunnyhop set to '%s' on you", (State ? "ON" : "OFF"));
 	}
 	
 	else
@@ -85,7 +85,7 @@ public Action CMD_Bunnyhop(int client, int args)
 					(StrEqual(TargetArg, "@humans") && !IsFakeClient(i)))
 				{
 					g_BunnyhopState[i] = State;
-					PrintToChat(i, "[SM] toggled autobunnyhop on you");
+					PrintToChat(i, "[SM] Autobunnyhop set to '%s' on you", (State ? "ON" : "OFF"));
 				}
 			}
 		}
