@@ -7,7 +7,7 @@
 
 #define ADMFLAG_BUNNYHOP ADMFLAG_ROOT
 
-int g_BunnyhopState[MAXPLAYERS] = {  };
+bool g_BunnyhopState[MAXPLAYERS] = {  };
 
 public Plugin my_info =
 {
@@ -26,7 +26,7 @@ public void OnPluginStart()
 
 public void OnClientDisconnect(int client)
 {
-	g_BunnyhopState[client] = 0;
+	g_BunnyhopState[client] = false;
 }
 
 public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3], float angles[3], int& weapon, int& subtype, int& cmdnum, int& tickcount, int& seed, int mouse[2])
@@ -58,7 +58,7 @@ public Action CMD_Bunnyhop(int client, int args)
 	int ClientID = StringToInt(ClientIDArg);
 	int State = StringToInt(StateArg);
 	
-	g_BunnyhopState[ClientID] = State;
+	g_BunnyhopState[ClientID] = view_as<bool>(State);
 	
 	if (ClientID != client)
 	{
