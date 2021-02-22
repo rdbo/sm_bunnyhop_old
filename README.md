@@ -9,4 +9,4 @@ OBS: You might want to change `ADMFLAG_BUNNYHOP` in the code, as only `root` can
   
 # Usage
   
-`sm_bunnyhop <client_id> <state>` or `sm_bunnyhop <@group> <state>` on the game console.  
+`sm_bunnyhop <client_id> <state>` or `sm_bunnyhop @<group> <state>` on the game console.  
