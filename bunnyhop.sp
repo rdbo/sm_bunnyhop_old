@@ -65,7 +65,7 @@ public Action CMD_Bunnyhop(int client, int args)
 		char ClientName[256];
 		GetClientName(client, ClientName, sizeof(ClientName));
 		PrintToChat(client, "[SM] toggled autobunnyhop on: %s", ClientName);
-		PrintToChat(ClientID, "[SM] toggled autobunnyhop you");
+		PrintToChat(ClientID, "[SM] toggled autobunnyhop on you");
 	}
 	
 	else
