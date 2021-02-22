@@ -50,27 +50,45 @@ public Action CMD_Bunnyhop(int client, int args)
 		return Plugin_Handled;
 	}
 	
-	char ClientIDArg[3];
-	char StateArg[2];
-	GetCmdArg(1, ClientIDArg, sizeof(ClientIDArg));
+	char TargetArg[16] = {  };
+	char StateArg[2] = {  };
+	GetCmdArg(1, TargetArg, sizeof(TargetArg));
 	GetCmdArg(2, StateArg, sizeof(StateArg));
 	
-	int ClientID = StringToInt(ClientIDArg);
-	int State = StringToInt(StateArg);
+	bool State = view_as<bool>(StringToInt(StateArg));
 	
-	g_BunnyhopState[ClientID] = view_as<bool>(State);
-	
-	if (ClientID != client)
+	if (TargetArg[0] != '@')
 	{
-		char ClientName[256];
-		GetClientName(client, ClientName, sizeof(ClientName));
-		PrintToChat(client, "[SM] toggled autobunnyhop on: %s", ClientName);
+		int ClientID = StringToInt(TargetArg);
+		g_BunnyhopState[ClientID] = State;
+		
+		if (ClientID != client)
+		{
+			char ClientName[256] = {  };
+			GetClientName(client, ClientName, sizeof(ClientName));
+			ReplyToCommand(client, "[SM] toggled autobunnyhop on: %s", ClientName);
+		}
+		
 		PrintToChat(ClientID, "[SM] toggled autobunnyhop on you");
 	}
 	
 	else
 	{
-		PrintToChat(client, "[SM] toggled autobunnyhop on self");
+		for (int i = 1; i < MaxClients && i < MAXPLAYERS; ++i)
+		{
+			if (IsClientInGame(i))
+			{
+				if ((StrEqual(TargetArg, "@all")) || 
+					(StrEqual(TargetArg, "@t") && GetClientTeam(i) == CS_TEAM_T) ||
+					(StrEqual(TargetArg, "@ct") && GetClientTeam(i) == CS_TEAM_CT) ||
+					(IsPlayerAlive(i) ? StrEqual(TargetArg, "@alive") : StrEqual(TargetArg, "@dead")) ||
+					(StrEqual(TargetArg, "@humans") && !IsFakeClient(i)))
+				{
+					g_BunnyhopState[i] = State;
+					PrintToChat(i, "[SM] toggled autobunnyhop on you");
+				}
+			}
+		}
 	}
 	
 	return Plugin_Handled;
