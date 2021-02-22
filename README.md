@@ -3,7 +3,9 @@ Sourcemod Bunnyhop Plugin (CS Source)
   
 # Installation
   
-Copy `bunnyhop.smx` to `<server_folder>/cstrike/addons/sourcemod/plugins`. You might want to change `ADMFLAG_BUNNYHOP` in the code, as only `root` can toogle bunnyhop by default.  
+Install Sourcemod and Metamod.  
+Copy `bunnyhop.smx` to `<server_folder>/cstrike/addons/sourcemod/plugins`. 
+OBS: You might want to change `ADMFLAG_BUNNYHOP` in the code, as only `root` can toogle bunnyhop by default.  
   
 # Usage
   
