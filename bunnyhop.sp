@@ -31,7 +31,7 @@ public void OnClientDisconnect(int client)
 
 public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3], float angles[3], int& weapon, int& subtype, int& cmdnum, int& tickcount, int& seed, int mouse[2])
 {
-	if (IsClientInGame(client) && g_BunnyhopState[client])
+	if (g_BunnyhopState[client] && IsClientInGame(client) && IsPlayerAlive(client))
 	{
 		int flags = GetEntityFlags(client);
 		
