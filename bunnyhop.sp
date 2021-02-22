@@ -21,7 +21,7 @@ public Plugin my_info =
 public void OnPluginStart()
 {
 	PrintToServer("[SM] Admin Auto Bunnyhop plugin has been loaded");
-	RegAdminCmd("sm_bunnyhop", CMD_Bunnyhop, ADMFLAG_BUNNYHOP, "Toggle Bunnyhop on a Player");
+	RegAdminCmd("sm_bunnyhop", CMD_Bunnyhop, ADMFLAG_BUNNYHOP, "Toggle Auto Bunnyhop on Players");
 }
 
 public void OnClientDisconnect(int client)
@@ -66,10 +66,10 @@ public Action CMD_Bunnyhop(int client, int args)
 		{
 			char ClientName[256] = {  };
 			GetClientName(client, ClientName, sizeof(ClientName));
-			ReplyToCommand(client, "[SM] Set Autobunnyhop to '%s' on player '%s'", (State ? "ON" : "OFF"), ClientName);
+			ReplyToCommand(client, "[SM] Set Auto Bunnyhop to '%s' on player '%s'", (State ? "ON" : "OFF"), ClientName);
 		}
 		
-		PrintToChat(ClientID, "[SM] Autobunnyhop set to '%s' on you", (State ? "ON" : "OFF"));
+		PrintToChat(ClientID, "[SM] Auto Bunnyhop set to '%s' on you", (State ? "ON" : "OFF"));
 	}
 	
 	else
@@ -85,7 +85,7 @@ public Action CMD_Bunnyhop(int client, int args)
 					(StrEqual(TargetArg, "@humans") && !IsFakeClient(i)))
 				{
 					g_BunnyhopState[i] = State;
-					PrintToChat(i, "[SM] Autobunnyhop set to '%s' on you", (State ? "ON" : "OFF"));
+					PrintToChat(i, "[SM] Auto Bunnyhop set to '%s' on you", (State ? "ON" : "OFF"));
 				}
 			}
 		}
